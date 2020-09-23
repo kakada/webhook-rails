@@ -1,0 +1,22 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @webhook.name
+%p
+  %strong Token:
+  = @webhook.token
+%p
+  %strong Username:
+  = @webhook.username
+%p
+  %strong Password:
+  = @webhook.password
+%p
+  %strong Url:
+  = @webhook.url
+%p
+  %strong Type:
+  = @webhook.type
+= link_to 'Edit', edit_webhook_path(@webhook)
+|
+\#{link_to 'Back', webhooks_path}

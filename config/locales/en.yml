@@ -1,0 +1,11 @@
+en:
+  webhook:
+    edit_webhook: Edit webhook
+    new_webhook: New webhook
+    type: Authentication Type
+    url: Url (HTTP post)
+    name: Name
+
+  shared:
+    save: Save
+    cancel: Cancel

@@ -1,0 +1,26 @@
+.d-flex.justify-content-center.py-4
+  .w-75
+    .d-flex.justify-content-end
+      = link_to '+ Add New', new_webhook_path, class: 'btn btn-primary mb-4'
+
+    %p#notice= notice
+    %h1 Webhooks
+    %table.table
+      %thead
+        %tr
+          %th= t('webhook.name')
+          %th= t('webhook.url')
+          %th= t('webhook.type')
+          %th
+      %tbody
+        - @webhooks.each do |webhook|
+          %tr
+            %td= webhook.name
+            %td= webhook.url
+            %td= webhook.type
+            %td
+              = link_to edit_webhook_path(webhook), class: "btn-circle btn-sm btn-warning text-decoration-none mr-1" do
+                %i.fas.fa-edit
+
+              = link_to webhook_path(webhook), method: :delete, data: { confirm: 'Are you sure to delete this form?'}, class: 'btn-circle btn-sm btn-danger text-decoration-none' do
+                %i.fas.fa-trash

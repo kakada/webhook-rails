@@ -1,0 +1,44 @@
+/ = form_with(model: webhook, local: true) do |form|
+/   - if webhook.errors.any?
+/     #error_explanation
+/       %h2
+/         = pluralize(webhook.errors.count, "error")
+/         prohibited this webhook from being saved:
+/       %ul
+/         - webhook.errors.full_messages.each do |message|
+/           %li= message
+/   .field
+/     = form.label :name
+/     = form.text_field :name
+/   .field
+/     = form.label :token
+/     = form.text_field :token
+/   .field
+/     = form.label :username
+/     = form.text_field :username
+/   .field
+/     = form.label :password
+/     = form.text_field :password
+/   .field
+/     = form.label :url
+/     = form.text_field :url
+/   .field
+/     = form.label :type
+/     = form.text_field :type
+/   .actions
+/     = form.submit
+
+.w-50.view-center
+  = simple_form_for @webhook.becomes(WebhookRails::Webhook) do |f|
+    = f.input :name, label: t('webhook.name')
+    = f.input :url, label: t('webhook.url')
+    = f.input :type, collection: WebhookRails::Webhook.types, input_html: { class: 'type' }, label: t('webhook.type'), include_blank: false
+    .types{'data-type' => 'WebhookRails::Webhooks::TokenAuth'}
+      = f.input :token, label: t('webhook.token')
+    .types{'data-type' => 'WebhookRails::Webhooks::BasicAuth'}
+      = f.input :username, label: t('webhook.username')
+      = f.input :password, label: t('webhook.password')
+
+    .actions
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), webhooks_path, class: 'btn btn-secondary'
